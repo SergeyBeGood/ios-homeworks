@@ -7,6 +7,10 @@
 
 import UIKit
 
+struct Post {
+    var tittle: String
+}
+
 class PostViewController: UIViewController {
 
     var post: String?
@@ -15,7 +19,7 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
-        title = "2023/06/07 Новый пост"
+        title = postTittle.tittle
 
         let infoButton =
         UIBarButtonItem(title: "Info", style: .done, target: self, action: #selector(showsInfoView))

@@ -7,6 +7,8 @@
 
 import UIKit
 
+var postTittle = Post(tittle: "Название статьи")
+
 class FeedViewController: UIViewController {
 
     //private var textField: UITextField?
