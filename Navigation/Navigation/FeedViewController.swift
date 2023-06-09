@@ -7,9 +7,11 @@
 
 import UIKit
 
-var postTittle = Post(tittle: "Название статьи")
+
 
 class FeedViewController: UIViewController {
+
+   private var postTittle = Post(tittle: "Название статьи")
 
     //private var textField: UITextField?
 
@@ -38,7 +40,8 @@ class FeedViewController: UIViewController {
 
     @objc func showDetails() {
         let postViewController = PostViewController()
-     //   postViewController.post = textField?.text
+        postViewController.post = postTittle.tittle
+        //postViewController.post = textField?.text
         //present(postViewController, animated: true)
         navigationController?.pushViewController(postViewController, animated: true)
     }
