@@ -34,7 +34,7 @@ class ProfileHeaderView: UIView {
     }()
 
     private lazy var profileName: UILabel = {
-        let label = UILabel
+        let label = UILabel()
         label.text = "Hipster Cat"
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -45,20 +45,13 @@ class ProfileHeaderView: UIView {
 
 
     private var noteLabel: UILabel = {
-        let label = UILabel
+        let label = UILabel()
         label.text = "Waiting for something..."
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
         return label
     }()
-
-
-//    let showStatusButton: UIButton
-//    let profileImage: UIImageView
-//    let profileName: UILabel
-//    let noteLabel: UILabel
-
 
     override init (frame: CGRect){
 
@@ -67,11 +60,6 @@ class ProfileHeaderView: UIView {
         addSubview(showStatusButton)
         addSubview(profileName)
         addSubview(noteLabel)
-
-        profileImage = UIImageView()
-        showStatusButton = UIButton()
-        profileName = UILabel()
-        noteLabel = UILabel()
 
     }
 
