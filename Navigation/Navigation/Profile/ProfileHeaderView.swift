@@ -8,15 +8,18 @@ import UIKit
 
 class ProfileHeaderView: UIView {
 
+    private var statusLabel: String = ""
+
     private lazy var profileImage: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = .systemGreen
         image.image = UIImage(named: "Hipster_Cat")
-        image.layer.cornerRadius = image.frame.height/2
+        image.layer.cornerRadius = 50
         image.layer.borderColor = UIColor.white.cgColor
         image.layer.borderWidth = 3
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
+        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
 
@@ -53,6 +56,22 @@ class ProfileHeaderView: UIView {
         return label
     }()
 
+    private lazy var statusTextField: UITextField = {
+        let textField = UITextField()    //
+        textField.backgroundColor = .white //
+        textField.layer.borderColor = UIColor.black.cgColor //
+        textField.layer.borderWidth = 1.0 //
+        textField.layer.cornerRadius = 12 //
+        textField.textColor = .black
+        textField.textAlignment = .left
+        textField.font = .systemFont(ofSize: 15, weight: .regular)
+        textField.placeholder = "Enter your status..."
+        textField.textAlignment = .center
+        textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+
     override init (frame: CGRect){
 
         super.init(frame: frame)
@@ -60,6 +79,7 @@ class ProfileHeaderView: UIView {
         addSubview(showStatusButton)
         addSubview(profileName)
         addSubview(noteLabel)
+        addSubview(statusTextField)
 
     }
 
@@ -80,7 +100,7 @@ class ProfileHeaderView: UIView {
 
         showStatusButton.frame = CGRect(
             x: 16,
-            y: safeAreaInsets.top + 132,
+            y: safeAreaInsets.top + 155,
             width: frame.width - 32,
             height: 50
         )
@@ -98,10 +118,27 @@ class ProfileHeaderView: UIView {
             width: 200,
             height: 20
         )
+
+        statusTextField.frame = CGRect(
+            x: 130,
+            y: 200,
+            width: 250,
+            height: 40)
     }
 
+
     @objc func tapButton() {
-        print ("Check Your Status")
-    }
+        noteLabel.text = statusLabel
+           if noteLabel.text  == "" {
+               noteLabel.text = "Enter the status..."
+           }
+       }
+
+       @objc func statusTextChanged(_ textField: UITextField) {
+           if let noteLabel = textField.text {
+               statusLabel = noteLabel
+           }
+       }
 }
+
 
