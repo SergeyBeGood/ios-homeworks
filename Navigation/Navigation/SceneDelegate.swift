@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
 
 
-        let profileViewController = ProfileViewController()
+        let profileViewController = LogInViewController()
         let profileNovigationViewController = UINavigationController(rootViewController: profileViewController)
         profileNovigationViewController.tabBarItem.title = "Profile"
         profileNovigationViewController.tabBarItem.image = UIImage(named: "Profile_Logo")
