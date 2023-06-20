@@ -33,6 +33,7 @@ class ProfileHeaderView: UIView {
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         button.backgroundColor = .systemBlue
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
@@ -43,6 +44,7 @@ class ProfileHeaderView: UIView {
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
         label.lineBreakMode = .byTruncatingMiddle
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -53,6 +55,7 @@ class ProfileHeaderView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -75,14 +78,17 @@ class ProfileHeaderView: UIView {
     override init (frame: CGRect){
 
         super.init(frame: frame)
+        addSubviews()
+        layouts()
+    }
+
+    private func addSubviews(){
         addSubview(profileImage)
         addSubview(showStatusButton)
         addSubview(profileName)
         addSubview(noteLabel)
         addSubview(statusTextField)
-
     }
-
 
     required init?(coder: NSCoder){
         fatalError("Fatal Error")
@@ -91,40 +97,87 @@ class ProfileHeaderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        profileImage.frame = CGRect(
-            x: 16,
-            y: safeAreaInsets.top + 16,
-            width: 100,
-            height: 100
-        )
-
-        showStatusButton.frame = CGRect(
-            x: 16,
-            y: safeAreaInsets.top + 155,
-            width: frame.width - 32,
-            height: 50
-        )
-
-        profileName.frame = CGRect(
-            x: 150,
-            y: 120,
-            width: 200,
-            height:20
-        )
-
-        noteLabel.frame = CGRect(
-            x: 130,
-            y: 170,
-            width: 200,
-            height: 20
-        )
-
-        statusTextField.frame = CGRect(
-            x: 130,
-            y: 200,
-            width: 250,
-            height: 40)
     }
+
+        private func layouts(){
+            
+//            profileImage.frame = CGRect(
+//                x: 16,
+//                y: safeAreaInsets.top + 16,
+//                width: 100,
+//                height: 100
+//            )
+            
+            NSLayoutConstraint.activate([
+                profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+                profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+                profileImage.heightAnchor.constraint(equalToConstant: 100),
+                profileImage.widthAnchor.constraint(equalToConstant: 100)
+            ])
+
+//            profileName.frame = CGRect(
+//                x: 150,
+//                y: 120,
+//                width: 200,
+//                height:20
+//            )
+
+            NSLayoutConstraint.activate([
+                profileName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+                profileName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 90),
+                profileName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -90),
+                profileName.widthAnchor.constraint(equalToConstant: 100)
+
+            ])
+
+//            noteLabel.frame = CGRect(
+//                x: 130,
+//                y: 170,
+//                width: 200,
+//                height: 20
+//            )
+
+            NSLayoutConstraint.activate([
+
+                noteLabel.topAnchor.constraint(equalTo: profileName.bottomAnchor, constant: 10),
+                noteLabel.leadingAnchor.constraint(equalTo: profileName.leadingAnchor),
+                noteLabel.trailingAnchor.constraint(equalTo: profileName.trailingAnchor)
+            ])
+
+//            statusTextField.frame = CGRect(
+//                x: 130,
+//                y: 200,
+//                width: 250,
+//                height: 40
+//            )
+
+            NSLayoutConstraint.activate([
+
+                statusTextField.topAnchor.constraint(equalTo: noteLabel.bottomAnchor, constant: 15),
+                statusTextField.leadingAnchor.constraint(equalTo: profileName.leadingAnchor),
+                statusTextField.trailingAnchor.constraint(equalTo: profileName.trailingAnchor),
+                //statusTextField.widthAnchor.constraint(equalToConstant: noteLabel.widthAnchor),
+                statusTextField.heightAnchor.constraint(equalToConstant: 50)
+            ])
+
+        
+
+//            showStatusButton.frame = CGRect(
+//                x: 16,
+//                y: safeAreaInsets.top + 155,
+//                width: frame.width - 32,
+//                height: 50
+//            )
+
+            NSLayoutConstraint.activate([
+                showStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 15),
+                showStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+                showStatusButton.trailingAnchor.constraint(equalTo: statusTextField.trailingAnchor),
+                showStatusButton.heightAnchor.constraint(equalToConstant: 50),
+                showStatusButton.widthAnchor.constraint(equalToConstant: (frame.width - 32))
+            ])
+
+        }
 
 
     @objc func tapButton() {
@@ -140,5 +193,6 @@ class ProfileHeaderView: UIView {
            }
        }
 }
+
 
 
