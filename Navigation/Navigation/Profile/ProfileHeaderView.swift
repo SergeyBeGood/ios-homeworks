@@ -48,8 +48,7 @@ class ProfileHeaderView: UIView {
         return label
     }()
 
-
-    private var noteLabel: UILabel = {
+    private lazy var noteLabel: UILabel = {
         let label = UILabel()
         label.text = "Waiting for something..."
         label.adjustsFontSizeToFitWidth = true
@@ -79,7 +78,7 @@ class ProfileHeaderView: UIView {
 
         super.init(frame: frame)
         addSubviews()
-        layouts()
+
     }
 
     private func addSubviews(){
@@ -96,89 +95,38 @@ class ProfileHeaderView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        layouts()
 
     }
 
         private func layouts(){
             
-//            profileImage.frame = CGRect(
-//                x: 16,
-//                y: safeAreaInsets.top + 16,
-//                width: 100,
-//                height: 100
-//            )
-            
             NSLayoutConstraint.activate([
                 profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
                 profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
                 profileImage.heightAnchor.constraint(equalToConstant: 100),
-                profileImage.widthAnchor.constraint(equalToConstant: 100)
-            ])
+                profileImage.widthAnchor.constraint(equalToConstant: 100),
 
-//            profileName.frame = CGRect(
-//                x: 150,
-//                y: 120,
-//                width: 200,
-//                height:20
-//            )
 
-            NSLayoutConstraint.activate([
-                profileName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
-                profileName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 90),
-                profileName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -90),
-                profileName.widthAnchor.constraint(equalToConstant: 100)
+                profileName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+                profileName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 140),
+                profileName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
 
-            ])
-
-//            noteLabel.frame = CGRect(
-//                x: 130,
-//                y: 170,
-//                width: 200,
-//                height: 20
-//            )
-
-            NSLayoutConstraint.activate([
-
-                noteLabel.topAnchor.constraint(equalTo: profileName.bottomAnchor, constant: 10),
+                noteLabel.topAnchor.constraint(equalTo: profileName.bottomAnchor, constant: 30),
                 noteLabel.leadingAnchor.constraint(equalTo: profileName.leadingAnchor),
-                noteLabel.trailingAnchor.constraint(equalTo: profileName.trailingAnchor)
-            ])
+                noteLabel.trailingAnchor.constraint(equalTo: profileName.trailingAnchor),
 
-//            statusTextField.frame = CGRect(
-//                x: 130,
-//                y: 200,
-//                width: 250,
-//                height: 40
-//            )
-
-            NSLayoutConstraint.activate([
-
-                statusTextField.topAnchor.constraint(equalTo: noteLabel.bottomAnchor, constant: 15),
+                statusTextField.topAnchor.constraint(equalTo: noteLabel.bottomAnchor, constant: 10),
                 statusTextField.leadingAnchor.constraint(equalTo: profileName.leadingAnchor),
                 statusTextField.trailingAnchor.constraint(equalTo: profileName.trailingAnchor),
-                //statusTextField.widthAnchor.constraint(equalToConstant: noteLabel.widthAnchor),
-                statusTextField.heightAnchor.constraint(equalToConstant: 50)
-            ])
+                statusTextField.heightAnchor.constraint(equalToConstant: 50),
 
-        
-
-//            showStatusButton.frame = CGRect(
-//                x: 16,
-//                y: safeAreaInsets.top + 155,
-//                width: frame.width - 32,
-//                height: 50
-//            )
-
-            NSLayoutConstraint.activate([
                 showStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 15),
                 showStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
                 showStatusButton.trailingAnchor.constraint(equalTo: statusTextField.trailingAnchor),
-                showStatusButton.heightAnchor.constraint(equalToConstant: 50),
-                showStatusButton.widthAnchor.constraint(equalToConstant: (frame.width - 32))
+                showStatusButton.heightAnchor.constraint(equalToConstant: 50)
             ])
-
         }
-
 
     @objc func tapButton() {
         noteLabel.text = statusLabel
