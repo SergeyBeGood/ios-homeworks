@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         layout()
 
         view.backgroundColor = UIColor.lightGray

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5159E4F2A41F32E00700220 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5159E4E2A41F32E00700220 /* LogInViewController.swift */; };
 		A53697E02A2E352F005ED519 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53697DF2A2E352F005ED519 /* AppDelegate.swift */; };
 		A53697E22A2E352F005ED519 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53697E12A2E352F005ED519 /* SceneDelegate.swift */; };
 		A53697E42A2E352F005ED519 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53697E32A2E352F005ED519 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A5159E4E2A41F32E00700220 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		A53697DC2A2E352F005ED519 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53697DF2A2E352F005ED519 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A53697E12A2E352F005ED519 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			children = (
 				A54DD12E2A346B93009094C6 /* ProfileHeaderView.swift */,
 				A53697FB2A2FA132005ED519 /* ProfileViewController.swift */,
+				A5159E4E2A41F32E00700220 /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 				A53697E02A2E352F005ED519 /* AppDelegate.swift in Sources */,
 				A53697FC2A2FA132005ED519 /* ProfileViewController.swift in Sources */,
 				A53697F42A2E4209005ED519 /* FeedViewController.swift in Sources */,
+				A5159E4F2A41F32E00700220 /* LogInViewController.swift in Sources */,
 				A53697E22A2E352F005ED519 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
