@@ -78,6 +78,7 @@ class ProfileHeaderView: UIView {
 
         super.init(frame: frame)
         addSubviews()
+        layouts()
 
     }
 
@@ -93,11 +94,6 @@ class ProfileHeaderView: UIView {
         fatalError("Fatal Error")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layouts()
-
-    }
 
         private func layouts(){
             
@@ -107,24 +103,26 @@ class ProfileHeaderView: UIView {
                 profileImage.heightAnchor.constraint(equalToConstant: 100),
                 profileImage.widthAnchor.constraint(equalToConstant: 100),
 
-
                 profileName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-                profileName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 140),
+                profileName.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
                 profileName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-
+                
                 noteLabel.topAnchor.constraint(equalTo: profileName.bottomAnchor, constant: 30),
                 noteLabel.leadingAnchor.constraint(equalTo: profileName.leadingAnchor),
                 noteLabel.trailingAnchor.constraint(equalTo: profileName.trailingAnchor),
+                noteLabel.heightAnchor.constraint(equalToConstant: 50),
 
                 statusTextField.topAnchor.constraint(equalTo: noteLabel.bottomAnchor, constant: 10),
                 statusTextField.leadingAnchor.constraint(equalTo: profileName.leadingAnchor),
                 statusTextField.trailingAnchor.constraint(equalTo: profileName.trailingAnchor),
                 statusTextField.heightAnchor.constraint(equalToConstant: 50),
-
+                
                 showStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 15),
                 showStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
                 showStatusButton.trailingAnchor.constraint(equalTo: statusTextField.trailingAnchor),
-                showStatusButton.heightAnchor.constraint(equalToConstant: 50)
+                showStatusButton.heightAnchor.constraint(equalToConstant: 50),
+                showStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor,constant:  -25),
+                    
             ])
         }
 

@@ -11,7 +11,6 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-   private var postTittle = Post(tittle: "Название статьи")
 
     //private var textField: UITextField?
 
@@ -40,9 +39,6 @@ class FeedViewController: UIViewController {
 
     @objc func showDetails() {
         let postViewController = PostViewController()
-        postViewController.post = postTittle.tittle
-        //postViewController.post = textField?.text
-        //present(postViewController, animated: true)
         navigationController?.pushViewController(postViewController, animated: true)
     }
 }
