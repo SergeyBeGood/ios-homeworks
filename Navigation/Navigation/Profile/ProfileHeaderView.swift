@@ -20,6 +20,9 @@ class ProfileHeaderView: UIView {
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.isUserInteractionEnabled = true
+        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarClick)))
+
         return image
     }()
 
@@ -31,6 +34,7 @@ class ProfileHeaderView: UIView {
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.isUserInteractionEnabled = true
         button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -57,6 +61,15 @@ class ProfileHeaderView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+
+    private let backView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBlue
+        view.alpha = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     private lazy var statusTextField: UITextField = {
         let textField = UITextField()    //
@@ -73,6 +86,19 @@ class ProfileHeaderView: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
+    
+    private lazy var closeBtn: UIButton = {
+
+        let button = UIButton(type: .system)
+        button.tintColor = .red
+
+        button.setImage(UIImage(systemName: "x.circle"), for: .normal)
+        button.alpha = 0
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeButtonClick)))
+        button.isUserInteractionEnabled = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     override init (frame: CGRect){
 
@@ -83,13 +109,52 @@ class ProfileHeaderView: UIView {
     }
 
     private func addSubviews(){
-        addSubview(profileImage)
         addSubview(showStatusButton)
         addSubview(profileName)
         addSubview(noteLabel)
         addSubview(statusTextField)
+        addSubview(backView)
+        addSubview(profileImage)
+        addSubview(closeBtn)
+
     }
 
+    
+    
+    @objc private func avatarClick() {
+        
+        let widthScreen = UIScreen.main.bounds.width
+        let heightScreen = UIScreen.main.bounds.width * 2
+        
+        UIView.animate(withDuration: 0.4, animations: {
+            self.profileImage.transform = CGAffineTransform(scaleX: 4, y: 4)
+            self.backView.frame = .init(origin: CGPoint(x: 0, y: 0), size: CGSize(width: widthScreen, height: heightScreen))
+            self.profileImage.center = self.backView.center
+            self.profileImage.layer.cornerRadius = 0
+        }) { _ in
+            UIView.animate(withDuration: 0.4) {
+                self.closeBtn.alpha = 1
+                self.backView.alpha = 0.5
+            }
+        }
+    }
+    
+    @objc private func closeButtonClick() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.closeBtn.alpha = 0
+            self.backView.alpha = 0
+
+        }) { _ in
+            UIView.animate(withDuration: 0.4, animations: {
+                self.profileImage.frame = .init(origin: CGPoint(x: 16, y: 16), size: CGSize(width: 100, height: 100))
+                self.profileImage.transform = .identity
+                self.profileImage.layer.cornerRadius = 50
+            })
+        }
+    }
+    
+    
+    
     required init?(coder: NSCoder){
         fatalError("Fatal Error")
     }
@@ -116,6 +181,17 @@ class ProfileHeaderView: UIView {
                 statusTextField.leadingAnchor.constraint(equalTo: profileName.leadingAnchor),
                 statusTextField.trailingAnchor.constraint(equalTo: profileName.trailingAnchor),
                 statusTextField.heightAnchor.constraint(equalToConstant: 50),
+                
+                closeBtn.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+                closeBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+                closeBtn.widthAnchor.constraint(equalToConstant: 30),
+                closeBtn.heightAnchor.constraint(equalToConstant: 30),
+                
+                backView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                backView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                backView.topAnchor.constraint(equalTo: topAnchor),
+                backView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                
                 
                 showStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 15),
                 showStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
