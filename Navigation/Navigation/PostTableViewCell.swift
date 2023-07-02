@@ -9,7 +9,6 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
-    
     private let likes: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0

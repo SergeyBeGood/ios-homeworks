@@ -13,7 +13,7 @@ struct Post {
     var image: String
     var likes: Int
     var views: Int
-    static func createPost() -> [Post] {
+    static func doPost() -> [Post] {
         var post = [Post]()
     post.append(Post(author: "Мейн-ку́н",
                      description: "Мейн-ку́н (англ. Maine Coon) — порода кошек, которая произошла от кошек штата Мэн на северо-востоке США. Аборигенная порода кошек Северной Америки.",
