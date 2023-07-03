@@ -9,11 +9,18 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
-    private let likes: UILabel = {
+    
+    var movetoPost: (() -> Void)? = nil
+    var upToLike: (() -> Void)? = nil
+    
+    
+    private lazy var likes: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickToLike)))
+        label.isUserInteractionEnabled = true
         return label
         
     }()
@@ -43,10 +50,13 @@ class PostTableViewCell: UITableViewCell {
         return view
     }()
     
-    private let postImage: UIImageView = {
+    private lazy var postImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickToPost)))
+
         
         return imageView
     }()
@@ -117,6 +127,14 @@ class PostTableViewCell: UITableViewCell {
             views.heightAnchor.constraint(equalToConstant: 50),
             views.bottomAnchor.constraint(equalTo: likes.bottomAnchor)
         ])
+    }
+    
+    @objc func clickToPost() {
+        if let action = self.movetoPost { action() }
+    }
+    
+    @objc func clickToLike() {
+        if let action = self.upToLike { action() }
     }
     
 }
