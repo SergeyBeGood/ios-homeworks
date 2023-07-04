@@ -8,35 +8,35 @@
 import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
-
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
-
+    
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     private let  seporatorForm: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemGray4
         return view
     }()
-
+    
     private let colorSet = UIColor(red: 0x48 / 255.0, green: 0x85 / 255.0, blue: 0xCC / 255.0, alpha: 1.0)
-
+    
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     private lazy var loginTextField: UITextField = {
         let textField = UITextField()    //
         textField.textColor = .black
@@ -52,7 +52,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         textField.delegate = self
         return textField
     }()
-
+    
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()    //
         textField.textColor = .black
@@ -69,7 +69,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         textField.delegate = self
         return textField
     }()
-
+    
     private let stackTextField: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -81,7 +81,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         stackView.clipsToBounds = true
         return stackView
     }()
-
+    
     private lazy var  loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log In", for: .normal)
@@ -99,18 +99,28 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         case .disabled    : button.alpha = 0.8
         default: button.alpha = 1
         }
+        
         return button
     }()
-
-
+    
+    private lazy var messageForm: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemGray3
+        label.numberOfLines = 0
+        label.font = UIFont.italicSystemFont(ofSize: label.font.pointSize)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         addSubview()
         setupConstraints()
     }
-
-
+    
+    
     func addSubview() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -120,65 +130,121 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         stackTextField.addArrangedSubview(seporatorForm)
         stackTextField.addArrangedSubview(passwordTextField)
         contentView.addSubview(loginButton)
+        contentView.addSubview(messageForm)
+
     }
-
-
+    
+    
     private func setupConstraints() {
-
+        
         let safeAreaGuide = view.safeAreaLayoutGuide
         let widthInset = view.frame.width - Metric.widthRangeInset
-
+        
         NSLayoutConstraint.activate([
-
+            
             //            scrollView
             scrollView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-
+            
             //            contentView
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-
+            
             //            logoImageView
             logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Metric.logoImageViewTopInset),
             logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: Metric.logoImageViewWidthInset),
             logoImageView.widthAnchor.constraint(equalToConstant: Metric.logoImageViewWidthInset),
-
+            
             //            loginTextField
             loginTextField.heightAnchor.constraint(equalToConstant: Metric.textFieldHeightInset),
-
+            
             //            passwordTextField
             passwordTextField.topAnchor.constraint(equalTo: seporatorForm.bottomAnchor),
             passwordTextField.heightAnchor.constraint(equalToConstant: Metric.textFieldHeightInset - Metric.seporatorFormHeightInset),
-
+            
             //            seporatorForm
             seporatorForm.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
             seporatorForm.heightAnchor.constraint(equalToConstant: Metric.seporatorFormHeightInset),
             seporatorForm.widthAnchor.constraint(equalToConstant:  widthInset),
-
+            
             //            stackTextField
             stackTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: Metric.stackTextTopInset),
             passwordTextField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             passwordTextField.widthAnchor.constraint(equalToConstant:  widthInset),
-
+            
             //            loginButton
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: Metric.loginButtonTopInset),
             loginButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: Metric.buttonHeightInset),
             loginButton.widthAnchor.constraint(equalToConstant:  widthInset),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+//            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            
+            messageForm.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 15),
+            messageForm.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor, constant: 10),
+            messageForm.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor,constant: -10),
+            
+            messageForm.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
         ])
     }
-
-
+    
+    let login: String = "Администратор  "
+    let password: String = "Администратор1"
     @objc private func pushLogin() {
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
-    }
+        //        navigationController?.pushViewController(ProfileViewController(), animated: true)
+        //        let login = "Администратор"
+        //        let password = "Администратор1"
+        
+        guard let loginText  = loginTextField.text else {
+            return
+        }
+        guard let passwordText  = passwordTextField.text else {
+            return
+        }
+        
+        var loginAlert = false
+        if loginText == login && passwordText == password {
+            loginAlert = false
+            navigationController?.pushViewController(ProfileViewController(), animated: true)
+        } else {
+            loginAlert = true
+            if loginText.count == 0 {
+                loginTextField.backgroundColor = UIColor(red: 240, green: 0, blue: 0, alpha: 0.3)
+                loginAlert = false
+            }
+            
+            if passwordText.count == 0 {
+                passwordTextField.backgroundColor = UIColor(red: 240, green: 0, blue: 0, alpha: 0.3)
+                loginAlert = false
+            } else if passwordText.count < 6 {
+                messageForm.text = "Пароль короче 5 символов"
+                loginAlert = false
+            }
+        }
+        
+        if loginAlert {
+            //            showAlert(title: "Ошибка", message: "Неверный логин или пароль")
+            
+            let alert = UIAlertController(title: "Ошибка", message: "Неверный логин или пароль", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default) {_ in
+            }
+            
+            alert.addAction(okAction)
+            present(alert, animated: true)  // вывод алерта
+        }
+        
+        passwordTextField.text = ""
+    
+}
+    
+    
 
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize: CGRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {

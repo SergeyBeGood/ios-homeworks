@@ -8,6 +8,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
 
+
     private var statusLabel: String = ""
 
     private lazy var profileImage: UIImageView = {
@@ -155,6 +156,8 @@ class ProfileHeaderView: UIView {
     
     
     
+    
+    
     required init?(coder: NSCoder){
         fatalError("Fatal Error")
     }
@@ -203,10 +206,15 @@ class ProfileHeaderView: UIView {
         }
 
     @objc func tapButton() {
-        noteLabel.text = statusLabel
            if noteLabel.text  == "" {
+               statusTextField.backgroundColor = UIColor(red: 240, green: 0, blue: 0, alpha: 0.3)
                noteLabel.text = "Enter the status..."
            }
+        else {
+            noteLabel.text = statusLabel
+            statusTextField.backgroundColor = .white
+
+        }
        }
 
        @objc func statusTextChanged(_ textField: UITextField) {

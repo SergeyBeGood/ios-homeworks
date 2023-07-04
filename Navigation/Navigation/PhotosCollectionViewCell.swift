@@ -7,13 +7,22 @@
 
 import UIKit
 
+protocol CustomCellDelegate: AnyObject {
+    func clickToImage(_ image: UIImage?, frameImage: CGRect, indexPath: IndexPath)
+}
+
 final class PhotosCollectionViewCell: UICollectionViewCell {
     
-    private let imageView: UIImageView = {
+    weak var delegate: CustomCellDelegate?
+    private var indexPathCell = IndexPath()
+    
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToImage)))
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -33,6 +42,9 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     }
     
 
+    func setIndexPath(_ indexPath: IndexPath) {
+        indexPathCell = indexPath
+    }
     
     private func setupContraints() {
         NSLayoutConstraint.activate([
@@ -52,4 +64,7 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)
     }
     
+    @objc private func tapToImage() {
+        delegate?.clickToImage(imageView.image, frameImage: imageView.frame, indexPath: indexPathCell)
+    }
 }
